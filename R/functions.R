@@ -34,7 +34,7 @@ test_sqlite_io <- function(test_case = "local", test_size = 10, tmp_dir = NULL){
     # ---- create-corpus ----   
     create_db <- paste0("rm -f ",db_path,"
                         
-                        sqlite3 ",db_path," <<EOF
+                        sqlite3 ",db_path,"<<EOF
                         
                         CREATE TABLE lexicon (
                         wordID INTEGER PRIMARY KEY,
