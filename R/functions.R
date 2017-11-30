@@ -18,7 +18,7 @@ test_sqlite_io <- function(test_case = "local", test_size = 10, tmp_dir = NULL){
                out_dir <- "out/"          
            },
            "smb_sharc" = {
-               db_path <- "~/../../Volumes/ooominds1/User/ac1adk/test_db/test_db"
+               db_path <- "~/shared/ooominds1/User/ac1adk/test_db/test_db"
                out_dir <- "out/"          
            },
            "sharc_scratch" = {
@@ -26,7 +26,7 @@ test_sqlite_io <- function(test_case = "local", test_size = 10, tmp_dir = NULL){
                out_dir <- "out/" 
            },
            "sharc_data" = {
-               db_path <- "/data/ac1adk/test_db/test_db"
+               db_path <- "~/data/ac1adk/test_db/test_db"
                out_dir <- "out/" 
            })
     
