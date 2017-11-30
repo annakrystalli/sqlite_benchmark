@@ -3,7 +3,7 @@ source("R/functions.R")
 # ---- bench-params ----
 test_cases <- "smb"
 args <- commandArgs(trailingOnly = TRUE)
-if(length(args) = 0) {
+if(length(args) != 0) {
     test_cases <- args[-1]
     tmp_dir <- args[1]}
 
