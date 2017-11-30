@@ -24,7 +24,7 @@ for(test_case in test_cases){
                out_dir <- "out/"          
            },
            "smb_sharc" = {
-               db_path <- "~/shared/ooominds1/User/ac1adk/test_db/test_db"
+               db_path <- "/shared/ooominds1/User/ac1adk/test_db/test_db"
                out_dir <- "out/"          
            },
            "sharc_scratch" = {
