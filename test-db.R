@@ -2,6 +2,7 @@ source("R/functions.R")
 
 # ---- bench-params ----
 test_cases <- "smb"
+tmp_dir <- NULL
 args <- commandArgs(trailingOnly = TRUE)
 if(length(args) != 0) {
     test_cases <- args[-1]
@@ -10,9 +11,13 @@ if(length(args) != 0) {
 
 # ---- bench-run ----
 for(test_case in test_cases){
+    cat(test_case, "\n")
     out <- NULL
     for(i in 2^(1:10)){
-        out <- dplyr::bind_rows(out, test_sqlite_io(test_case = test_case, test_size = i))
+        out <- dplyr::bind_rows(out, 
+                                test_sqlite_io(test_case = test_case, 
+                                               test_size = i,
+                                               tmp_dir = tmp_dir))
     }
     
     # ---- bench-write_out ----
