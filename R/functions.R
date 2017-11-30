@@ -5,34 +5,13 @@ if (!require("pacman")) install.packages("pacman")
 pacman::p_load(depend, character.only = T)
 
 # ---- sqltb-function----
-test_sqlite_io <- function(test_case = "local", test_size = 10, tmp_dir = NULL){
-    switch(test_case,
-           "local" = {
-               db_path <- "test_db"
-               out_dir <- "out/"
-           },
-           "smb_local" = {
-               source("R/mount.R")
-               mount_ooominds1_volume()
-               db_path <- "~/../../Volumes/ooominds1/User/ac1adk/test_db/test_db"
-               out_dir <- "out/"          
-           },
-           "smb_sharc" = {
-               db_path <- "~/shared/ooominds1/User/ac1adk/test_db/test_db"
-               out_dir <- "out/"          
-           },
-           "sharc_scratch" = {
-               db_path <- paste0(tmp_dir,"/test_db")
-               out_dir <- "out/" 
-           },
-           "sharc_data" = {
-               db_path <- "~/data/ac1adk/test_db/test_db"
-               out_dir <- "out/" 
-           })
-    
+test_sqlite_io <- function(test_case = "local", test_size = 10, 
+                           dp_path = "test_db", out_dir = "out/", 
+                           tmp_dir = NULL){
     
     # ---- create-corpus ----   
-    create_db <- paste0("rm -f ",db_path,"
+    create_db <- paste0(
+"rm -f ",db_path,"
 sqlite3 ",db_path," <<EOF
 CREATE TABLE lexicon (
 wordID INTEGER PRIMARY KEY,
