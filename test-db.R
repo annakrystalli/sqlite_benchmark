@@ -14,11 +14,11 @@ test_sqlite_io <- function(test_case = "local", test_size = 10){
                },
            "sharc_fast" = {
                db_path <- "/fastdata/ac1adk/test_db/test_db"
-               out_dir <- "/data/ac1adk/test_db/out/" 
+               out_dir <- "out/" 
            },
            "sharc" = {
                db_path <- "/data/ac1adk/test_db/test_db"
-               out_dir <- "/data/ac1adk/test_db/out/" 
+               out_dir <- "out/" 
            })
     
     
