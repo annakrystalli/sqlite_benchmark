@@ -13,7 +13,7 @@ if(length(args) != 0) {
 for(test_case in test_cases){
     cat(test_case, "\n")
     out <- NULL
-    for(i in 2^(1:10)){
+    for(i in 2^(1:9)){
         out <- dplyr::bind_rows(out, 
                                 test_sqlite_io(test_case = test_case, 
                                                test_size = i,

@@ -8,7 +8,7 @@
 # Request a certain number of cores on one node
 #$ -pe smp 4 #not needed
 # Request a certain amount of RAM _per_core_
-#$ -l rmem=4G
+#$ -l rmem=12G
 # Run job from current directory
 #$ -cwd
 #$ -j y
