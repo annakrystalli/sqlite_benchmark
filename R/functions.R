@@ -6,7 +6,7 @@ pacman::p_load(depend, character.only = T)
 
 # ---- sqltb-function----
 test_sqlite_io <- function(test_case = "local", test_size = 10, 
-                           dp_path = "test_db", out_dir = "out/", 
+                           db_path = "test_db", out_dir = "out/", 
                            tmp_dir = NULL){
     
     # ---- create-corpus ----   
