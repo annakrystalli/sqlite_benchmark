@@ -12,7 +12,7 @@
 # Run job from current directory
 #$ -cwd
 #$ -j y
-#$ -o ~/logs/$JOB_ID
+#$ -o ~/logs/${JOB_NAME}${JOB_ID}
 
 # Set this environment variable to the number of cores requested above
 # export OMP_NUM_THREADS=8
@@ -21,4 +21,4 @@
 module load apps/R/3.4.0/gcc-4.8.5
 
 # batch script. Values after script are exported args to R script
-Rscript 'test-db.R' 'sharc'
+Rscript 'test-db.R' $TMPDIR sharc_scratch scharc_data smb_sharc
