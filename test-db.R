@@ -1,7 +1,7 @@
 source("R/functions.R")
 
 # ---- bench-params ----
-test_cases <- "smb"
+test_cases <- "smb_local"
 tmp_dir <- NULL
 args <- commandArgs(trailingOnly = TRUE)
 if(length(args) != 0) {
@@ -18,6 +18,12 @@ for(test_case in test_cases){
                out_dir <- "out/"
            },
            "smb_local" = {
+               source("R/mount.R")
+               mount_ooominds1_volume()
+               db_path <- "~/../../Volumes/ooominds1/User/ac1adk/test_db/test_db"
+               out_dir <- "out/"          
+           },
+           "smb_local_home" = {
                source("R/mount.R")
                mount_ooominds1_volume()
                db_path <- "~/../../Volumes/ooominds1/User/ac1adk/test_db/test_db"
