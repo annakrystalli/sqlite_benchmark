@@ -1,0 +1,27 @@
+---
+title: "Report"
+author: "Anna Krystalli"
+date: "08/12/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+
+load_data <- function(dir = "out/") { 
+ list.files(dir, full.names = T) %>% lapply(read_csv) %>%
+   dplyr::bind_rows()
+}
+
+df <- load_data()
+```
+
+```{r}
+df %>% ggplot(aes(test_size, time_elapsed, group = test_case, color = test_case)) + geom_path()
+```
+
