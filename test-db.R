@@ -1,7 +1,7 @@
 source("R/functions.R")
 
 # ---- bench-params ----
-test_cases <- "smb_local"
+test_cases <- "local"
 tmp_dir <- NULL
 args <- commandArgs(trailingOnly = TRUE)
 if(length(args) != 0) {
@@ -14,7 +14,7 @@ for(test_case in test_cases){
    # test-params
     switch(test_case,
            "local" = {
-               db_dir <- ""
+               db_dir <- "test_dbs/"
                out_dir <- "out/"
            },
            "smb_local" = {
@@ -34,7 +34,7 @@ for(test_case in test_cases){
                out_dir <- "out/"          
            },
            "sharc_scratch" = {
-               db_dir <- paste0(tmp_dir,"/test_db")
+               db_dir <- paste0(tmp_dir,"/test_db/")
                out_dir <- "out/" 
            },
            "sharc_data" = {
@@ -64,4 +64,7 @@ for(test_case in test_cases){
     
     # ---- bench-write_out ----
     write.csv(out, paste0(out_dir, "out_", test_case, ".csv"))
+    
+    # ---- clear-db_dir ----
+    list.files(db_dir, full.names = T) %>% lapply(file.remove)
 }
