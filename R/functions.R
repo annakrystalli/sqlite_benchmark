@@ -5,9 +5,14 @@ if (!require("pacman")) install.packages("pacman")
 pacman::p_load(depend, character.only = T)
 
 # ---- sqltb-function----
-test_sqlite_io <- function(test_case = "local", test_size = 10, 
-                           db_path = "test_db", out_dir = "out/", 
+create_testdb <- function(test_case = "local", test_size = 10, 
+                           db_dir = "", out_dir = "out/", 
                            tmp_dir = NULL){
+    
+    db_path <- paste0(db_dir, "test_db_", test_size)
+    if(db_dir != ""){
+        dir.create(db_dir, showWarnings = FALSE, recursive = TRUE)
+        }
     
     # ---- create-corpus ----   
     create_db <- paste0(
@@ -66,13 +71,21 @@ EOF")
     # ---- pop-db ----
     populate_db(db, corpus, lexicon)
     dbDisconnect(db)
+    cat("test_case: ", test_case, "- test_size: ", test_size, "CREATE DB - time elapsed: ", 
+        t1 - t0, "\n \n")
+}
     
-    # ---- test-db ----
+    # ---- test-db ---
+test_sqlite_io <- function(test_case = "local", test_size = 10, 
+                           db_dir = "", out_dir = "out/", 
+                           tmp_dir = NULL) {
+    
+    db_path <- paste0(db_dir, "test_db_", test_size)    
     db <- dbConnect(RSQLite::SQLite(), dbname = db_path)
     t0 <- Sys.time()
     dbGetQuery(db, "SELECT * FROM corpus INNER JOIN lexicon ON corpus.wordID = lexicon.wordID")
     t1 <- Sys.time()
-    cat("test_case: ", test_case, "- test_size: ", test_size, "time elapsed: ", t1 - t0, "\n \n")
+    cat("test_case: ", test_case, "- test_size: ", test_size, "TEST JOIN - time elapsed: ", t1 - t0, "\n \n")
     
     dbDisconnect(db)
     
@@ -83,3 +96,4 @@ EOF")
            platform = sessionInfo()$platform,
            running = sessionInfo()$running)
 }
+
