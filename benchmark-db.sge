@@ -21,5 +21,5 @@
 module load apps/R/3.4.0/gcc-4.8.5
 
 # batch script. Values after script are exported args to R script
-# other options: sharc_scratch scharc_data
-Rscript 'test-db.R' $TMPDIR smb_sharc
+# other options: sharc_scratch scharc_data smb_sharc
+Rscript 'test-db.R' $TMPDIR sharc_scratch
