@@ -12,7 +12,7 @@
 # Run job from current directory
 #$ -cwd
 #$ -j y
-#$ -o ~/logs/$JOB_NAME-$JOB_ID
+#$ -o ~/logs/$JOB_ID-$JOB_NAME
 
 # Set this environment variable to the number of cores requested above
 # export OMP_NUM_THREADS=8
