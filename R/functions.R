@@ -34,6 +34,7 @@ EOF")
     
     # ---- create-db ----
     system(create_db)
+    t0 <- Sys.time()
     db <- dbConnect(RSQLite::SQLite(), dbname = db_path)
     
     corpus <- austen_books() %>%
@@ -72,7 +73,7 @@ EOF")
     populate_db(db, corpus, lexicon)
     dbDisconnect(db)
     cat("test_case: ", test_case, "- test_size: ", test_size, "CREATE DB - time elapsed: ", 
-        t1 - t0, "\n \n")
+        Sys.time() - t0, "\n \n")
 }
     
     # ---- test-db ---
