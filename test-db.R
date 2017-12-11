@@ -47,7 +47,7 @@ for(test_case in test_cases){
     
     cat(test_case, "\n")
     
-    for(i in 2^(1:9)){
+    for(i in test_sizes){
         create_testdb(test_case = test_case, 
                        test_size = i,
                        db_dir = db_dir,
