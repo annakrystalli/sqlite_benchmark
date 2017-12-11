@@ -1,12 +1,15 @@
 source("R/functions.R")
 
 # ---- bench-params ----
-test_cases <- "local"
 tmp_dir <- NULL
 args <- commandArgs(trailingOnly = TRUE)
 if(length(args) != 0) {
-    test_cases <- args[-1]
-    tmp_dir <- args[1]}
+    test_cases <- args[-(1:3)]
+    tmp_dir <- args[1]
+    test_sizes <- 2^(as.numeric(args[2]):as.numeric(args[3]))
+    } else {
+        source("params.R")
+    }
 
 
 # ---- bench-run ----
@@ -38,7 +41,7 @@ for(test_case in test_cases){
                out_dir <- "out/" 
            },
            "sharc_data" = {
-               db_dir <- "~/data/ac1adk/test_db/"
+               db_dir <- "/data/ac1adk/test_db/"
                out_dir <- "out/" 
            })
     
@@ -53,7 +56,7 @@ for(test_case in test_cases){
     }
     
     out <- NULL
-    for(i in 2^(1:9)){
+    for(i in test_sizes){
         out <- dplyr::bind_rows(out, 
                                 test_sqlite_io(test_case = test_case, 
                                                test_size = i,
