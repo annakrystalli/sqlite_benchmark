@@ -7,6 +7,8 @@ editor_options:
   chunk_output_type: inline
 ---
 
+***
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -26,15 +28,17 @@ The code in [**`test_db`**](https://github.com/annakrystalli/sqlite_benchmark/bl
 
 Briefly:
 
-- it builds a sqlite database from the complete novels of Jane Austen (accessed through the `janeaustenr` package) (not timed) and replicates it `test_size` times *(`r unique(df$test_size)`)*. (see function [`create_testdb()`](https://github.com/annakrystalli/sqlite_benchmark/blob/master/R/functions.R))
-- It times a full inner join of the corpus on the lexicon.
-
-The analysis was either run locally or on sharc, and tested the i/o speed of a variety of storage location, **local**, **smb**, **sharc_data** and **sharc_scratch**, by varying the location the db was writtend and read from.
+- it builds a sqlite database from the complete novels of Jane Austen (accessed through the `janeaustenr` package) (not timed), replicated `test_size` times *(`r unique(df$test_size)`)*. (see function [`create_testdb`](https://github.com/annakrystalli/sqlite_benchmark/blob/cf0aa52f2496bb6996ed3be413b5c78698eafc8e/R/functions.R#L8))
+- It then **times a full inner join** of the corpus on the lexicon. (see function [`test_sqlite_io`](https://github.com/annakrystalli/sqlite_benchmark/blob/cf0aa52f2496bb6996ed3be413b5c78698eafc8e/R/functions.R#L80))
 
 
 
+The analysis was either run locally or on sharc, and tested the i/o speed of a variety of storage location, **local**, **smb**, **sharc_data** and **sharc_scratch**, by varying the location the db was written and read from.
 
-```{r, fig.width=10, fig.height=5}
+
+
+
+```{r, fig.width=10, fig.height=5, echo=FALSE}
 p <- df %>% 
     ggplot(aes(test_size, time_elapsed, group = test_case, color = test_case)) +
     geom_path() +
