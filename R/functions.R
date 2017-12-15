@@ -4,7 +4,7 @@ depend <- c("DBI", "RSQLite", "dplyr", "janeaustenr", "stringr", "tidytext", "NC
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(depend, character.only = T)
 
-# ---- sqltb-function----
+# ---- sqltb-create_db----
 create_testdb <- function(test_case = "local", test_size = 10, 
                            db_dir = "", out_dir = "out/", 
                            tmp_dir = NULL){
@@ -76,7 +76,7 @@ EOF")
         Sys.time() - t0, "\n \n")
 }
     
-    # ---- test-db ---
+# ---- sqltb-test-db ----
 test_sqlite_io <- function(test_case = "local", test_size = 10, 
                            db_dir = "", out_dir = "out/", 
                            tmp_dir = NULL) {
@@ -97,4 +97,3 @@ test_sqlite_io <- function(test_case = "local", test_size = 10,
            platform = sessionInfo()$platform,
            running = sessionInfo()$running)
 }
-
