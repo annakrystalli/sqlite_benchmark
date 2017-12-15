@@ -47,3 +47,8 @@ p <- df %>%
 p %>% plotly::ggplotly()
 ```
 
+
+## Conclusions
+
+- **all TuoS storage has equivalent i/o speeds** if test run on sharc and slightly better performance than running test locally with local db.
+- testing locally but accessing data through smb (test case: `"smb_local"`) **over x 4 slower**
