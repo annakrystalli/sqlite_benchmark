@@ -7,6 +7,8 @@ if(length(args) != 0) {
     test_cases <- args[-(1:3)]
     tmp_dir <- args[1]
     test_sizes <- 2^(as.numeric(args[2]):as.numeric(args[3]))
+    clear_db <- T
+    db_create <- T
     } else {
         source("params.R")
     }
@@ -47,12 +49,14 @@ for(test_case in test_cases){
     
     cat(test_case, "\n")
     
+    if(db_create){ 
     for(i in test_sizes){
         create_testdb(test_case = test_case, 
                        test_size = i,
                        db_dir = db_dir,
                        out_dir = out_dir,
                        tmp_dir = tmp_dir)
+    }
     }
     
     out <- NULL
@@ -69,5 +73,5 @@ for(test_case in test_cases){
     write.csv(out, paste0(out_dir, "out_", test_case, ".csv"))
     
     # ---- clear-db_dir ----
-    list.files(db_dir, full.names = T) %>% lapply(file.remove)
+    if(clear_db){list.files(db_dir, full.names = T) %>% lapply(file.remove)}
 }
