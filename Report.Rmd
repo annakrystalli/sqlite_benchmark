@@ -1,19 +1,20 @@
 ---
-title: "Report"
+title: "Sqlite benchmarking report"
 author: "Anna Krystalli"
 date: "08/12/2017"
-output: html_document
+output: html_notebook
+editor_options: 
+  chunk_output_type: inline
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
-```{r}
+```{r, message=FALSE, warning=FALSE, echo = F}
 library(tidyverse)
 
-load_data <- function(dir = "out/") { 
+load_data <- function(dir = paste0(here::here(), "/out")) { 
  list.files(dir, full.names = T) %>% lapply(read_csv) %>%
    dplyr::bind_rows()
 }
@@ -21,7 +22,24 @@ load_data <- function(dir = "out/") {
 df <- load_data()
 ```
 
-```{r}
-df %>% ggplot(aes(test_size, time_elapsed, group = test_case, color = test_case)) + geom_path()
+The code in [**`test_db`**](https://github.com/annakrystalli/sqlite_benchmark/blob/master/test-db.R) was benchmarked under a number of different scenarios. 
+
+Briefly:
+
+- it builds a sqlite database from the complete novels of Jane Austen (accessed through the `janeaustenr` package) (not timed) and replicates it `test_size` times *(`r unique(df$test_size)`)*. (see function [`create_testdb()`](https://github.com/annakrystalli/sqlite_benchmark/blob/master/R/functions.R))
+- It times a full inner join of the corpus on the lexicon.
+
+The analysis was either run locally or on sharc, and tested the i/o speed of a variety of storage location, **local**, **smb**, **sharc_data** and **sharc_scratch**, by varying the location the db was writtend and read from.
+
+
+
+
+```{r, fig.width=10, fig.height=5}
+p <- df %>% 
+    ggplot(aes(test_size, time_elapsed, group = test_case, color = test_case)) +
+    geom_path() +
+    geom_point()
+
+p %>% plotly::ggplotly()
 ```
 
