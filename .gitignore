@@ -4,5 +4,7 @@
 .Ruserdata
 *.Rproj
 test_db
+test_dbs/
 *rds
 params.R
+R/create_vault*
